@@ -132,12 +132,6 @@ public class LogBlock extends JavaPlugin {
                 pm.addPermission(perm);
             }
         }
-        try {
-            Metrics metrics = new Metrics(this);
-            metrics.start();
-        } catch (IOException ex) {
-            getLogger().info("Could not start metrics: " + ex.getMessage());
-        }
     }
 
     private void registerEvents() {
