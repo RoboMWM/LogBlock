@@ -36,7 +36,8 @@ public class InteractLogging extends LoggingListener {
             final Player player = event.getPlayer();
             final Location loc = clicked.getLocation();
 
-            switch (type) {
+            switch (type)
+            {
                 case LEVER:
                 case WOOD_BUTTON:
                 case STONE_BUTTON:
@@ -97,7 +98,23 @@ public class InteractLogging extends LoggingListener {
                         }
                     }
                     break;
+                case ITEM_FRAME:
+                case PAINTING:
+                case ARMOR_STAND:
+                    //TODO: add config option
+
+                    // Breaking entity
+                    if (event.getAction() == Action.LEFT_CLICK_AIR)
+                        consumer.queueBlockBreak(Actor.actorFromEntity(player), loc, typeId, blockData);
+
+                    // Using entity
+                    //TODO: double check if it's air or block that's called
+                    if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                        consumer.queueBlock(Actor.actorFromEntity(player), loc, typeId, typeId, blockData);
+
+                    break;
             }
         }
     }
 }
+
